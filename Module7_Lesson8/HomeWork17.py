@@ -7,15 +7,15 @@
 def encode(data):
     list = []
     if data == "":
-        return(0)
+        return('')
+    else:
+        a = data[0]
+        b = data.count(a)        
+        data = data.replace(a, '', b)
+        list = [a, b]
+        list.append(encode(data))
+        return(list)
     
-    a = data[0]
-    b = 1
-    b = data.rfind(a)
-    if b > 1:
-        list = list + [a, b]
-        return (b)
-
 '''
     a = ()
     b = ()
