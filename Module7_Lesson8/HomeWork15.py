@@ -18,14 +18,22 @@
 '''
 
 def flatten(data):
+    data_1 = []
+    data_2 = []
+    flat_list = []
     if data == []:
         return([])
-    if data[0] is list:
-        data_1 = flatten(data[0])
+    if type(data[0]) is list:
+        data_1 = data_1 + (flatten(data[0]))
         x = data.pop(0)
         data_2 = flatten(data)
         flat_list = data_1 + data_2
-        return(flat_list)
+    else:
+        data_1.append(data[0])
+        x = data.pop(0)
+        data_2 = flatten(data)
+        flat_list = data_1 + data_2
+    return(flat_list)
 
 data = [1, 2, [3, 4, [5, 6]], 7]
 print(flatten(data))
