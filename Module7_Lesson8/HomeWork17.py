@@ -3,93 +3,43 @@
  наприклад ["X", "X", "X", "Z", "Z", "X", "X", "Y", "Y", "Y", "Z", "Z" ]) або рядок (наприклад, "XXXZZXXYYYZZ"). Функція повинна повернути закодований 
 список елементів (наприклад ["X", 3, "Z", 2, "X", 2, "Y", 3, "Z", 2]).
 '''
-import re
 
 def encode(data):
-    list = []
-    if data == "":
-        return('')
+    if type(data) == str:
+        data_list = []
+        for s in data:
+            data_list.append(s)
     else:
-        a = data[0]
-        print(re.match(r'{a}' , data))
-        x = re.split(a, data)
-        b = data.count(a)
-        print(x[0])
-        data = data.replace(a, '', b)
+        data_list = data
+    list = []
+    i = 1
+    if data_list == []:
+        return([])
+    else:
+        a = data_list.pop(0)
         list.append(a)
-        list.append(b)
-        list.append(encode(data))
+        list_b = encode(data_list)
+        if len(list_b) > 0:
+            b = list_b[0]
+            if a == b:
+                i = list_b[1]
+                c = list_b.pop(0)
+                c = list_b.pop(0)
+                i = i + 1
+                list.append(i)
+                if list_b != []:
+                    list = list + list_b
+            else:
+                list_num = []
+                list_num.append(i)
+                list = list + list_num + list_b
+                
+        else:
+            list = list + list_b
+            list.append(i)
         return(list)
     
-'''
-    a = ()
-    b = ()
-    y = 1
-    encoded_data = []
-    data_1 = []
-    data_2 = []
-    if data == []:
-        return([])
-    a = data.pop(0)
-    if a == encode(data)
-
-    #if x == encode(data):
-        
-        b = encode(data)
-        if a == b:
-            return(a + b)
-        else:
-            return(a)
-    #count
-    #encoded_data.append()
-
-   
-    if len(data) == 1:
-        a = data.pop(0)
-        x = encode(data)
-        data_2 = [x, 1]
-        encoded_data = data_1 + data_2
-        return(encoded_data)
-    if data[0] == data[1]:
-        a = data.pop(0)
-        x = encode(data)
-        y = y + 1
-        data_1 = [x , y]
-    else:
-        a = data.pop(0)
-        x = encode(data)
-        data_2 = [x, 1]
-        encoded_data = data_1 + data_2
-        return(encoded_data)
-'''
-    
-   
-
-
 #data = ["X", "X", "X", "Z", "Z", "X", "X", "Y", "Y", "Y", "Z", "Z" ]
 data ="XXXZZXXYYYZZ"
 print (encode(data))
-"""
-def decode(data):   
-    x = ()
-    y = 0
-    decoded_data = []
-    string = ''
-    data_1 = []
-    data_2 = []
-    if data == []:
-        return([])
-    else:
-        x = data[0]
-        a = data.pop(0)
-        y = data[0]
-        a = data.pop(0)
-        data_1.extend(x*y)
-        data_2 = decode(data)
-        decoded_data = data_1 + data_2
-
-    return(decoded_data)    
-
-data = ["X", 3, "Z", 2, "X", 2, "Y", 3, "Z", 2]
-print (decode(data))
-"""
+    

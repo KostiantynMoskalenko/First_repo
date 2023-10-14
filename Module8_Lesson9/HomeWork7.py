@@ -26,3 +26,24 @@ Cat = collections.namedtuple("Cat", ["nickname", "age", "owner"])
 
 
 def convert_list(cats):
+    #global Cat
+    if type(cats[0]) == dict:
+        print('list')
+        cat_list = []
+        for cat in cats:
+            cat_list.append(Cat(cat['nickname'], cat['age'], cat['owner']))
+    else:
+        cat_list = []
+        for cat in cats:
+            cat_dict = {"nickname": cat.nickname, "age": cat.age, "owner": cat.owner}
+            cat_list.append(cat_dict)
+
+            
+    return(cat_list)
+
+cats = [
+    {"nickname": "Mick", "age": 5, "owner": "Sara"},
+    {"nickname": "Barsik", "age": 7, "owner": "Olga"},
+    {"nickname": "Simon", "age": 3, "owner": "Yura"},
+]
+print(convert_list(cats))
