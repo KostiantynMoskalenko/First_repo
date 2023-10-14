@@ -3,6 +3,7 @@
  наприклад ["X", "X", "X", "Z", "Z", "X", "X", "Y", "Y", "Y", "Z", "Z" ]) або рядок (наприклад, "XXXZZXXYYYZZ"). Функція повинна повернути закодований 
 список елементів (наприклад ["X", 3, "Z", 2, "X", 2, "Y", 3, "Z", 2]).
 '''
+import re
 
 def encode(data):
     list = []
@@ -10,9 +11,13 @@ def encode(data):
         return('')
     else:
         a = data[0]
-        b = data.count(a)        
+        print(re.match(r'{a}' , data))
+        x = re.split(a, data)
+        b = data.count(a)
+        print(x[0])
         data = data.replace(a, '', b)
-        list = [a, b]
+        list.append(a)
+        list.append(b)
         list.append(encode(data))
         return(list)
     
