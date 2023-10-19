@@ -19,40 +19,48 @@
 Якщо число Фібоначчі зберігається у словнику cache, то функція fibonacci повертає число з кеша. 
 Якщо його немає у кеші, то ми обчислюємо число і поміщаємо його в кеш, і повертаємо з функції fibonacci.
 
-
-def fibonacci(n):
-    if n > 1:
-        return fibonacci(n-1) + fibonacci(n-2)
-    elif n ==1:
-        return 1
-    else:
-        return 0
 '''
-
 
 def caching_fibonacci():
     cache = []        
     def fibonacci(n):
-        if n > 1 and n not in cache:
-            return fibonacci(n-1) + fibonacci(n-2)
-        elif n ==1:
-            return 1
+        if n == 0 and n not in cache:
+            cache.append(0)
+            return cache[1]
+        elif n == 1 and n not in cache:
+            cache.append(1)
+            return cache[0]
+        elif n > 1 and n not in cache:
+            k = fibonacci(n-1)
+            print(k)
+            l = fibonacci(n-2)
+            print(l)
+          
+ #           m = int(l[0])
+  #          n = k[0]
+            cache.append(k + l)
+            return cache[-1]
         else:
-            return 0
+            print (n)
+            return cache[n]
+    return(fibonacci)
+
+
+
+def caching_fibonacci1():
+    cache = []        
+    def fibonacci(n):
+        for i in range (0, n+1):
+            if i == 0 and n not in cache:
+                cache.append(0)
+            elif i == 1 and n not in cache:
+                cache.append(1)
+            elif i > 1 and n not in cache:
+                cache.append(cache[i-1] + cache[i-2])
+        else:
+            print (n)
+            return cache[n]
     return(fibonacci)
 
 print(caching_fibonacci()(6))
 
-'''
-def caching_fibonacci():
-    def fibonacci(n):
-        if n > 1:
-            return caching_fibonacci()(n-1) + caching_fibonacci()(n-2)
-        elif n ==1:
-            return 1
-        else:
-            return 0
-    return(fibonacci)
-'''
-
-    
