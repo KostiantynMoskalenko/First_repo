@@ -21,7 +21,6 @@ print(second.count_save)  # 2
 print(third.count_save)  # 3
 '''
 
-
 import pickle
 
 
@@ -34,13 +33,12 @@ class Person:
 
 
 class Contacts:
-    def __init__(self, filename: str, contacts: list[Person] = None, count_save = 0):
+    def __init__(self, filename: str, contacts: list[Person] = None):
         if contacts is None:
             contacts = []
         self.filename = filename
         self.contacts = contacts
-        self.count_save = count_save - 1
-        
+        self.count_save = 0
 
     def save_to_file(self):
         with open(self.filename, "wb") as file:
@@ -50,15 +48,13 @@ class Contacts:
         with open(self.filename, "rb") as file:
             content = pickle.load(file)
         return content
-    
+
     def __getstate__(self):
         attributes = self.__dict__.copy()
-        print(attributes)
         attributes['fh'] = None
-        self.count_save = count_save + 1
-        print(self.count_save)
+        attributes['count_save'] = attributes['count_save'] + 1
+        #count_save += 1
         return attributes
-
 contacts = [
     Person(
         "Allen Raymond",
